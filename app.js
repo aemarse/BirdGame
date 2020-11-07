@@ -21,21 +21,20 @@ mongoose.connect("mongodb://localhost:27017/birdDB", {useNewUrlParser: true, use
 app.get("/", function(req, res) {
   const scBirds = new XenoCanto();
 
-  const lat = "36.974117";
-  const lon = "-122.030792";
-
   const query = {
   	coords: {
-      lat: lat,
-      lon: lon
-    }
+      lat: "36.974117",
+      lon: "-122.030792"
+    },
+    len: "5-10"
   };
 
   scBirds.search(query, function(self){
-  	console.log(self.entity);
+  	if(self.entity.numRecordings > 0) {
+      const birdObj = self.entity.recordings[Math.floor(Math.random()*self.entity.recordings.length)];
+      res.render("home", { birdObj: birdObj });
+    }
   });
-
-  res.render("home");
 });
 
 app.listen(3000, function(req, res) {

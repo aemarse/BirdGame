@@ -1,1 +1,18 @@
-<p>Hello World!</p>
+<%- include('partials/header') %>
+
+<div class="container">
+  <h1><%=birdObj.en%></h1>
+  <div class="sono">
+    <img class="sono-img img-fluid" src="<%=birdObj.sono.full%>" alt="">
+  </div>
+  <div class="player">
+    <audio controls>
+      <source src="<%=birdObj.file%>" type="audio/mpeg">
+    </audio>
+  </div>
+  <form class="newBird" action="/" method="get">
+    <button type="submit" class="btn btn-outline-dark">Get New Bird</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>
